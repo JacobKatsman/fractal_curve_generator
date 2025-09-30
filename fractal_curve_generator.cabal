@@ -61,12 +61,17 @@ executable sdl-line-example2
     -- .hs or .lhs file containing the Main module.
     main-is:          Main.hs
 
+    -- 
+    
     -- Modules included in this executable, other than Main.
     other-modules:   Test.TestModule,
                      Koch.KochModule,
                      Core.CoreModule,
                      Koch2.Koch2Module,
-                     Simple.SimpleModule 
+                     Simple.SimpleModule,
+                     Minkowski_sausage.Minkowski_sausageModule,
+                     Peano_curve.Peano_curveModule,
+                     Levy_C_curve.Levy_C_curveModule
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:

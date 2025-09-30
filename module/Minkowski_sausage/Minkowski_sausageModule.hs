@@ -1,0 +1,52 @@
+module Minkowski_sausage.Minkowski_sausageModule where
+
+import qualified SDL
+import SDL (($=))
+import Linear.V2(V2(..))
+import Linear.V4(V4(..))
+import Control.Monad.Trans.State
+import Core.CoreModule as CMM(DPoint(..), Size, Angle, AppM, myRight, myLeft, myRotate, step, drawLine_true, logMsg, move)
+
+-- module ("Minkowski_sausage")
+-- https://en.wikipedia.org/wiki/Minkowski_sausage
+forward ::  CMM.Size -> SDL.Renderer -> CMM.AppM ()
+forward vectorLength renderer = go vectorLength 4 renderer
+  where
+    go :: CMM.Size -> Int -> SDL.Renderer -> StateT CMM.DPoint IO ()
+    go vectorLength n renderer = do
+       if (n == 0) then
+         step vectorLength  renderer
+       else
+         go (vectorLength / 3)  (n - 1)  renderer
+         >> myLeft 90
+         >> go (vectorLength / 3)  (n - 1)  renderer
+         >> myRight 90
+         >> go (vectorLength / 3)  (n - 1)  renderer
+         >> myRight 90
+         >> go (vectorLength / 3)  (n - 1)  renderer
+         >> myRight 90
+         >> go (vectorLength / 3)  (n - 1)  renderer
+         >> myLeft 90
+         >> go (vectorLength / 3)  (n - 1)  renderer
+         >> myLeft 90
+         >> go (vectorLength / 3)  (n - 1)  renderer
+
+-- Function for drawing a scene at once
+drawScene :: SDL.Renderer -> CMM.DPoint -> IO ()
+drawScene renderer initialPoint = do
+    SDL.rendererDrawColor renderer $= V4 255 255 255 255 
+    SDL.clear renderer
+    SDL.rendererDrawColor renderer $= V4 0 0 0 255
+    let initialPoint = CMM.DPoint { x = 600.0, y = 600.0, c = 90.0 }
+    _ <- execStateT (do
+       forward 600.0 renderer
+       myRight 90         
+       forward 600.0 renderer
+       myRight 90
+       forward 600.0 renderer
+       myRight 90
+       forward 600.0 renderer
+       myRight 90       
+       ) initialPoint
+    SDL.present renderer
+

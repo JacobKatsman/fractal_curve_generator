@@ -20,21 +20,27 @@ import Data.Time()
 import Data.Time.Clock(getCurrentTime)
 import Data.Time.Format (formatTime, defaultTimeLocale)
 
-import Core.CoreModule as CMM(DPoint(..), Size, Angle, AppM, myRight, myLeft, myRotate, step, drawLine_true, move)
+import Core.CoreModule as CMM(DPoint(..), Size, Angle, AppM, myRight, myLeft, myRotate, step, drawLine_true, logMsg, move)
 import Test.TestModule as TESTF(myFunctionTest) 
 import Koch.KochModule as KOCHF(drawScene)
 import Koch2.Koch2Module as KOCHF2(drawScene)
 import Simple.SimpleModule as STAR(drawScene)
+import Minkowski_sausage.Minkowski_sausageModule as MS(drawScene)
+import Peano_curve.Peano_curveModule as PC(drawScene)
+import Levy_C_curve.Levy_C_curveModule  as LC(drawScene)
 
 main :: IO ()
 main = do
+  -- SIO.putStrLn $ show (KOCHF.myFunctionTestKoch 5) -- тестовый модуль 
   SDL.initializeAll
   window <- SDL.createWindow "SDL2 start Example" SDL.defaultWindow { SDL.windowInitialSize = SDL.V2 1200 1200 }
   renderer <- SDL.createRenderer window (-1) SDL.defaultRenderer
   let initialPoint = CMM.DPoint { x = 400.0, y = 800.0, c = 90.0 }
   -- There are do call the calculation of our fractal curve
-  -- KOCHF2.drawScene renderer initialPoint
-  STAR.drawScene renderer initialPoint
+  -- MS.drawScene renderer initialPoint
+  -- STAR.drawScene renderer initialPoint
+  -- PC.drawScene renderer initialPoint
+  LC.drawScene renderer initialPoint
 
   let loop = do
         events <- SDL.pollEvents
