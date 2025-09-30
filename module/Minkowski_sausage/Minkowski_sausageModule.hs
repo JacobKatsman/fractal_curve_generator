@@ -5,7 +5,7 @@ import SDL (($=))
 import Linear.V2(V2(..))
 import Linear.V4(V4(..))
 import Control.Monad.Trans.State
-import Core.CoreModule as CMM(DPoint(..), Size, Angle, AppM, myRight, myLeft, myRotate, step, drawLine_true, logMsg, move)
+import Core.CoreModule as CMM(DPoint(..), Size, Angle, AppM, myRight, myLeft, myRotate, step, drawLine_true,  move)
 
 -- module ("Minkowski_sausage")
 -- https://en.wikipedia.org/wiki/Minkowski_sausage

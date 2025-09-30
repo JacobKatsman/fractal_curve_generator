@@ -20,7 +20,7 @@ import Data.Time()
 import Data.Time.Clock(getCurrentTime)
 import Data.Time.Format (formatTime, defaultTimeLocale)
 
-import Core.CoreModule as CMM(DPoint(..), Size, Angle, AppM, myRight, myLeft, myRotate, step, drawLine_true, logMsg, move)
+import Core.CoreModule as CMM(DPoint(..), Size, Angle, AppM, myRight, myLeft, myRotate, step, drawLine_true, move)
 import Test.TestModule as TESTF(myFunctionTest) 
 import Koch.KochModule as KOCHF(drawScene)
 import Koch2.Koch2Module as KOCHF2(drawScene)
